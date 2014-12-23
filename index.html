@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en-us" ng-app="app">
+
+<head>
+<meta charset="utf-8">
+<title>PF2015</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+<script type="text/javascript" src="js/pexeso-controller.js"></script>
+<link rel="stylesheet" href="css/pexeso.css" type="text/css" />
+</head>
+
+<body ng-controller="PexesoController" data-ng-init="init()">
+<div id="mainContent">
+	<div ng-repeat="card in board" 
+		class="card"
+		ng-class="card.state"
+		ng-click="selectCard(card)"
+	>{{card.cardId}}</div>
+
+</body>
+</html>
