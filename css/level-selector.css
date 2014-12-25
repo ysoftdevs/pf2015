@@ -1,0 +1,45 @@
+#levelSelector {
+    max-width: 24em;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.levelItem {
+    width: 3em;
+    height: 2em;
+    border: 1px solid gray;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    margin-left: 0.5em;
+    margin-bottom: 0.4em;
+    float: left;
+    padding-top: 1em;
+    cursor: pointer;
+    background:rgba(0,0,0,0.5);
+}
+
+.locked {
+    padding-top: 0.3em;
+    padding-bottom: 0.8em;
+    color: yellow;
+}
+
+.clearfix{zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";}
+.clearfix:after{clear:both;}
+
+#infoGraphics {
+    width: 100%;
+    text-align: center;
+}
+
+
+#badges {
+    text-align: center;
+    vertical-align: top;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}

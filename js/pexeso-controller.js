@@ -1,5 +1,8 @@
-angular.module('app', ['angular-flippy'])
-.controller('PexesoController', function($scope, $timeout) {
+angular.module('app', ['angular-flippy', 'level-selector'])
+.controller('PexesoController', function($scope, $timeout, $rootScope) {
+    
+    $scope.isLevelVisible = false;
+    
     $scope.languages = {
         'cs-CZ': {
             title: 'Čeština'
@@ -210,10 +213,14 @@ angular.module('app', ['angular-flippy'])
     
     
     /**
-     * Initialize game.
+     * Start Level
      */
-    $scope.init = function() {
+    $scope.initLevel = function(event, args) {
         $scope.generateBoard(4*4);
+        $scope.isLevelVisible = true;
     };
+    
+    
+    $rootScope.$on('startLevel', $scope.initLevel);
     
 });
