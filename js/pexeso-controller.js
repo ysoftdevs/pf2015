@@ -1,5 +1,5 @@
-angular.module('app', [])
-.controller('PexesoController', ['$scope', function($scope) {
+angular.module('app', ['angular-flippy'])
+.controller('PexesoController', function($scope, $timeout) {
     $scope.languages = {
         'cs-CZ': {
             title: 'Čeština'
@@ -100,7 +100,8 @@ angular.module('app', [])
             cardId: cardId,
             card: card,
             index: index,
-            state: 'mystery'
+            state: 'mystery',
+            flipState: ''
         };
     };
     
@@ -134,6 +135,11 @@ angular.module('app', [])
         $scope.selectionCounter = 0;
         angular.forEach($scope.selectedCards, function(card) {
             card.state = state;
+            if (state == "mystery") {
+                card.flipState = '';
+            } else {
+                card.flipState = 'flipped';
+            }
         });
         $scope.selectedCards = [];
     };    
@@ -164,6 +170,13 @@ angular.module('app', [])
     };
     
     /**
+     * Reset selection of current cards
+     */
+    $scope.resetSelection = function() {
+        $scope.setSelectionState('mystery');
+    };
+    
+    /**
      * Click handler to select card.
      */
     $scope.selectCard = function(card) {
@@ -174,8 +187,9 @@ angular.module('app', [])
         
         $scope.selectionCounter += 1;
         
+
         if ($scope.selectionCounter == $scope.maxSelected + 1) {
-            $scope.setSelectionState('mystery');
+            $scope.resetSelection();
             return;
         } else {
             $scope.selectedCards.push(card);
@@ -183,11 +197,14 @@ angular.module('app', [])
         
         if (card.state == 'mystery') {
             card.state = 'selected' + $scope.selectionCounter;
+            card.flipState = 'flipped';
         }
         
         if ($scope.areAllSelectedSame()) {
             $scope.setSelectionState('solved');
-        }
+        } else if ($scope.selectionCounter == $scope.maxSelected) {
+            $timeout($scope.resetSelection, 1000);
+        } 
         
     };
     
@@ -199,4 +216,4 @@ angular.module('app', [])
         $scope.generateBoard(4*4);
     };
     
-}]);
+});

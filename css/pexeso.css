@@ -24,6 +24,7 @@
 	color: #996633;
 	cursor: pointer;
 }
+
 .buttonStyle:active {
 	border: thin solid #99CC00;
 	background-color: #F5FFD2;
@@ -32,8 +33,11 @@
 }
 
 .card {
-	width: 10em;
-	height: 10em;
+	width: 5em;
+	height: 5em;
+	margin: 0.2em;
+	float: left;
+	cursor: pointer;
 }
 
 .solved {
@@ -54,5 +58,5 @@
 
 .mystery {
 	background: blue;
-	color: blue;
+	
 }
