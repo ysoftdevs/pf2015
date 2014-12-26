@@ -56,7 +56,8 @@
         </flippy-front>
 
         <flippy-back>
-            {{card.cardId}}
+            <img src="img/cards/{{card.cardId}}.png" ng-show="card.cardType == 'picture'">
+            <div ng-hide="card.cardType == 'picture'">{{card.card['en-US']}}</div>
         </flippy-back>
 
     </flippy>

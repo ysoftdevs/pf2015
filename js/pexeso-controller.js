@@ -8,6 +8,9 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     // How many cards must be found as the same.
     $scope.chainLength = 2;
     
+    // Whic card types are active
+    $scope.currentCardTypes = [ 'picture', 'picture' ];
+    
     /**
      * Level descriptor:
      * 
@@ -71,50 +74,55 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     };
     
     $scope.basicCards = {
-        'printer' : {
-            'cs-CZ': 'tiskárna',
-            'en-US': 'house',
-            'sk-SK': 'tlačiareň'
+        'cherry' : {
+            'cs-CZ': 'třešnička',
+            'en-US': 'cherry',
+            'sk-SK': 'čerešňa'
         },
-        'toner' : {
-            'cs-CZ': 'toner',
-            'en-US': 'toner',
-            'sk-SK': 'toner'
+        'cheese' : {
+            'cs-CZ': 'sýr',
+            'en-US': 'cheese',
+            'sk-SK': 'syr'
+        },
+        'carrot' : {
+            'cs-CZ': 'mrkev',
+            'en-US': 'carrot',
+            'sk-SK': 'mrkva'
         }, 
-        'finisher': {
-            'cs-CZ': 'finisher',
-            'en-US': 'finisher',
-            'sk-SK': 'finisher'
+        'dwarf': {
+            'cs-CZ': 'trpaslík',
+            'en-US': 'dwarf',
+            'sk-SK': 'trpaslík'
         },
-        'paper': {
-            'cs-CZ': 'papír',
-            'en-US': 'paper',
-            'sk-SK': 'papier'
+        'barrel': {
+            'cs-CZ': 'sud',
+            'en-US': 'barrel',
+            'sk-SK': 'sud'
         },
-        'black': {
-            'cs-CZ': 'černá',
-            'en-US': 'black',
-            'sk-SK': 'čierna'
+        'butterfly': {
+            'cs-CZ': 'motýl',
+            'en-US': 'butterfly',
+            'sk-SK': 'motýľ'
         },
-        'white': {
-            'cs-CZ': 'bílá',
-            'en-US': 'white',
-            'sk-SK': 'biela'
+        'ghost': {
+            'cs-CZ': 'duch',
+            'en-US': 'ghost',
+            'sk-SK': 'duch'
         },
-        'color': {
-            'cs-CZ': 'barva',
-            'en-US': 'color',
-            'sk-SK': 'farba'
+        'rose': {
+            'cs-CZ': 'růže',
+            'en-US': 'rose',
+            'sk-SK': 'ruža'
         },
-        'duplexPrint': {
-            'cs-CZ': 'oboustranný tisk',
-            'en-US': 'duplex print',
-            'sk-SK': 'obostranná tlač'
+        'sun': {
+            'cs-CZ': 'slunce',
+            'en-US': 'sun',
+            'sk-SK': 'slnko'
         },
-        'stapler': {
-            'cs-CZ': 'sešívačka',
-            'en-US': 'stapler',
-            'sk-SK': 'zošívačka'
+        'cloud': {
+            'cs-CZ': 'oblak',
+            'en-US': 'cloud',
+            'sk-SK': 'oblak'
         }
     };
     
@@ -122,33 +130,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     $scope.cards = $scope.basicCards;
     $scope.maxSelected = 2;
     
-    $scope.board = [
-        {
-            cardId:'house',
-            index:1,
-            state: 'solved'
-        }, { 
-            cardId: 'dog',
-            index:1,
-            state: 'mystery'
-        }, {
-            cardId:'house',
-            index:2,
-            state: 'solved'
-        }, {
-            cardId:'printer',
-            index:1,
-            state: 'mystery'
-        }, { 
-            cardId: 'dog',
-            index:2,
-            state: 'mystery'
-        },{
-            cardId:'printer',
-            index:2,
-            state: 'mystery'
-        }
-        ];
+    $scope.board = [];
     
     /**
      * Generate playing card object.
@@ -157,6 +139,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         return {
             cardId: cardId,
             card: card,
+            cardType: 'picture',
             index: index,
             state: 'mystery',
             flipState: ''
@@ -179,7 +162,8 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             var card = fullStack[cardIndex];
             fullStack.splice(cardIndex, 1);
             for (var instanceIndex = 0; instanceIndex < $scope.chainLength; instanceIndex++) {
-                var tempCard = $scope.getCard(card, card.cardId, instanceIndex + 1)
+                var tempCard = $scope.getCard(card, card.cardId, instanceIndex + 1);
+                tempCard.cardType = $scope.currentCardTypes[instanceIndex];
                 stack.push(tempCard);
             }
         }
@@ -299,6 +283,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     $scope.initLevel = function(event, args) {
         $scope.levelIndex = args.levelIndex;
         $scope.currentLevel = $scope.levels[$scope.levelIndex];
+        $scope.currentCardTypes = $scope.currentLevel.cardTypes;
         $scope.generateBoard($scope.currentLevel.totalCards);
         $scope.isLevelVisible = true;
     };
