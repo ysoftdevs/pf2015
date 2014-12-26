@@ -13,6 +13,8 @@
 <script type="text/javascript" src="js/level-selector-controller.js"></script>
 <link rel="stylesheet" href="css/level-selector.css" type="text/css" />
 
+<script type="text/javascript" src="js/level-complete-controller.js"></script>
+
 <link rel="stylesheet" href="css/flippy.css" />
 <script type="text/javascript" src="js/flippy.js"></script>
 </head>
@@ -52,7 +54,21 @@
         </flippy-back>
 
     </flippy>
+</div>
 
+
+<div id="levelCompleteContent" ng-controller="LevelCompleteController" ng-show="isLevelCompleteVisible">
+   <div id="congratulation">Congratulations!</div>
+        <div>
+            <a class="levelButton" id="replayButton" ng-click="restartLevel()"><i class="fa fa-repeat"></i>Play again</a>
+            <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i>Next level</a>
+        </div>
+        <div>
+            <a class="levelButton" id="webButton" ng-click="openUrl(constellation.wiki)" ng-show="isFinalScreenVisible">
+                <i class="fa fa-thumbs-up" ></i>Visit PF 2015 website</a>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

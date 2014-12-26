@@ -1,7 +1,62 @@
-angular.module('app', ['angular-flippy', 'level-selector'])
+angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
 .controller('PexesoController', function($scope, $timeout, $rootScope) {
     
     $scope.isLevelVisible = false;
+    
+    $scope.levelIndex = 0;
+    
+    // How many cards must be found as the same.
+    $scope.chainLength = 2;
+    
+    /**
+     * Level descriptor:
+     * 
+     * totalCards - How many cards are on the board
+     * chainLength - How many cards must be found from the same kind
+     * cardType - Define type of game
+     *  - picture - display image of item
+     *  - "languageCode" - display text in specified language
+     *  - oneLanguage - pickup one language for each card on the beginning of game
+     *  - randomLanguage - each turn of card selects different language for the same item
+     */
+    $scope.levels = [
+        {
+            totalCards: 2*2,
+            chainLength: 2,
+            cardTypes: ['picture', 'picture']
+        }, 
+        {
+            totalCards: 4*4, 
+            chainLength: 2,
+            cardTypes: ['picture', 'picture'] 
+        }, {
+            totalCards: 4*4,
+            chainLength: 2,
+            cardTypes: ['picture', 'en-US']
+        }, {
+            totalCards: 4*4,
+            chainLength: 2,
+            cardTypes: ['picture', 'oneLanguage']
+        }, {
+            totalCards: 4*4,
+            chainLength: 2,
+            cardTypes: ['picture', 'randomLanguage']
+        }, {
+            totalCards: 3*3,
+            chainLength: 3,
+            cardTypes: ['picture', 'picture', 'picture']
+        }, {
+            totalCards: 3*3,
+            chainLength: 3,
+            cardTypes: ['picture', 'randomLanguage', 'randomLanguage']
+        }, {
+            totalCards: 4*4,
+            chainLength: 4,
+            cardTypes: ['picture', 'randomLanguage', 'randomLanguage', 'randomLanguage']
+        }
+    ];
+    
+    $scope.currentLevel = $scope.levels[0];
     
     $scope.languages = {
         'cs-CZ': {
@@ -109,15 +164,25 @@ angular.module('app', ['angular-flippy', 'level-selector'])
     };
     
     /**
-     * Generate playing board.
+     * Generate game board.
      */
     $scope.generateBoard = function(totalCount) {
         $scope.board = [];
+        var fullStack = []
         var stack = [];
         angular.forEach($scope.basicCards, function(card, cardId) {
-            stack.push($scope.getCard(card, cardId, 1));
-            stack.push($scope.getCard(card, cardId, 2));
+            fullStack.push($scope.getCard(card, cardId, 1));
         });
+        
+        for (var groupIndex = 0; groupIndex < totalCount / $scope.chainLength; groupIndex++) {
+            var cardIndex = Math.floor((Math.random() * fullStack.length)); 
+            var card = fullStack[cardIndex];
+            fullStack.splice(cardIndex, 1);
+            for (var instanceIndex = 0; instanceIndex < $scope.chainLength; instanceIndex++) {
+                var tempCard = $scope.getCard(card, card.cardId, instanceIndex + 1)
+                stack.push(tempCard);
+            }
+        }
         
         for (var index = 0; index < totalCount; index++) {
             var coordinate = Math.floor((Math.random()* stack.length));
@@ -173,6 +238,19 @@ angular.module('app', ['angular-flippy', 'level-selector'])
     };
     
     /**
+     * Check whether all items on the board are solved.
+     */
+    $scope.isLevelComplete = function() {
+        for (var index=0; index < $scope.board.length; index++) {
+            var item = $scope.board[index];
+            if (item.state != "solved") {
+                return false;
+            }
+        }
+        return true;
+    };
+    
+    /**
      * Reset selection of current cards
      */
     $scope.resetSelection = function() {
@@ -205,6 +283,9 @@ angular.module('app', ['angular-flippy', 'level-selector'])
         
         if ($scope.areAllSelectedSame()) {
             $scope.setSelectionState('solved');
+            if ($scope.isLevelComplete()) {
+                $timeout($scope.completeLevel, 1000);
+            }
         } else if ($scope.selectionCounter == $scope.maxSelected) {
             $timeout($scope.resetSelection, 1000);
         } 
@@ -216,10 +297,21 @@ angular.module('app', ['angular-flippy', 'level-selector'])
      * Start Level
      */
     $scope.initLevel = function(event, args) {
-        $scope.generateBoard(4*4);
+        $scope.levelIndex = args.levelIndex;
+        $scope.currentLevel = $scope.levels[$scope.levelIndex];
+        $scope.generateBoard($scope.currentLevel.totalCards);
         $scope.isLevelVisible = true;
     };
     
+    /**
+     * Level complete - display level outro screen.
+     */
+    $scope.completeLevel = function() {
+        var args = {
+            levelIndex: $scope.levelIndex
+        };
+        $rootScope.$emit('completeLevel', args);
+    };
     
     $rootScope.$on('startLevel', $scope.initLevel);
     
