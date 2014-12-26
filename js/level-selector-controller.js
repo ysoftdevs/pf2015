@@ -1,5 +1,5 @@
-angular.module('level-selector', [])
-.controller('LevelSelectorController', function($scope, $rootScope) {
+angular.module('level-selector', ['LocalStorageModule'])
+.controller('LevelSelectorController', function($scope, $rootScope, localStorageService) {
     
     $scope.isLevelSelectorVisible = true;
     
@@ -26,5 +26,44 @@ angular.module('level-selector', [])
         };
         $rootScope.$emit('startLevel', args);
     };
+    
+    $scope.completeLevel = function(even, args) {
+        var levelIndex = args.levelIndex;
+        if (levelIndex + 1 < $scope.levelLock.length) {
+            $scope.levelLock[levelIndex + 1].state = 'unlocked';
+            $scope.storeConfiguration();
+        }
+    };
+    
+    $scope.storeConfiguration = function() {
+        if (!localStorageService.isSupported) {
+            return;
+        }
+
+        localStorageService.add('levelLock',$scope.levelLock);
+    };
+    
+    $scope.loadConfiguration = function() {
+        if (!localStorageService.isSupported) {
+            return;
+        }
+
+        var value = localStorageService.get('levelLock');
+
+        // store defaults
+        if (!value) {
+            $scope.storeConfiguration();
+        } else {
+            $scope.levelLock = value;
+        }
+    };
+
+    var init = function() {
+        $scope.loadConfiguration();  
+    };
+
+    $rootScope.$on('completeLevel', $scope.completeLevel);
+    
+    init();
     
 });
