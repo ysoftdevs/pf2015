@@ -72,8 +72,16 @@ flippy.fancy {
   height: 150px;
 }
 flippy.fancy img {
+  width:auto;
+  max-width:100%;
+  height:auto;
+  max-height:100%;
+  vertical-align: middle;
+}
+.cardHelper {
+  display: inline-block;
   height: 100%;
-  width: 100%;
+  vertical-align: middle; 
 }
 flippy.fancy flippy-front {
   float: none;
