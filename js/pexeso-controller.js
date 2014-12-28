@@ -35,18 +35,21 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
      */
     $scope.levels = [
         {
+            levelName: "01: 2x2 Picture",
             totalCards: 2*2,
             cardsPerRow: 2,
             chainLength: 2,
             cardTypes: ['picture', 'picture']
         }, 
         {
+            levelName: "02: 3x3 Picture",
             totalCards: 3*3,
             cardsPerRow: 3,
             chainLength: 3,
             cardTypes: ['picture', 'picture', 'picture']
         },
         {
+            levelName: "03: 4x4 Picture",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 4,
@@ -317,7 +320,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         };
         
         var paddingLeft = Math.floor((window.innerWidth - (cardSize + 10) * cardsPerRow) / 2);
-        var paddingTop = Math.floor((window.innerHeight - (cardSize + 10) * cardsPerRow) / 2);
+        var paddingTop = Math.floor((window.innerHeight - (cardSize + 10) * cardsPerRow) / 2) - 32;
         
         if (paddingLeft < 0) {
             paddingLeft = 0;
@@ -341,9 +344,11 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         $scope.levelIndex = args.levelIndex;
         $scope.currentLevel = $scope.levels[$scope.levelIndex];
         $scope.currentCardTypes = $scope.currentLevel.cardTypes;
-        $scope.computeCardSize($scope.currentLevel.cardsPerRow);
         $scope.chainLength = $scope.currentLevel.chainLength;
+        
+        $scope.computeCardSize($scope.currentLevel.cardsPerRow);
         $scope.generateBoard($scope.currentLevel.totalCards);
+        
         $scope.isLevelVisible = true;
     };
     
@@ -355,6 +360,14 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             levelIndex: $scope.levelIndex
         };
         $rootScope.$emit('completeLevel', args);
+    };
+    
+    /**
+     * Return to level selection screen
+     */
+    $scope.cancelLevel = function() {
+       $scope.isLevelVisible = false;
+       $rootScope.$emit('cancelLevel', {});
     };
     
     $rootScope.$on('startLevel', $scope.initLevel);

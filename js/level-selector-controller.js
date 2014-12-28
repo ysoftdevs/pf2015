@@ -35,6 +35,10 @@ angular.module('level-selector', ['LocalStorageModule'])
         }
     };
     
+    $scope.cancelLevel = function(even, args) {
+        $scope.isLevelSelectorVisible = true;
+    };
+    
     $scope.storeConfiguration = function() {
         if (!localStorageService.isSupported) {
             return;
@@ -63,6 +67,7 @@ angular.module('level-selector', ['LocalStorageModule'])
     };
 
     $rootScope.$on('completeLevel', $scope.completeLevel);
+    $rootScope.$on('cancelLevel', $scope.cancelLevel);
     
     init();
     

@@ -23,47 +23,59 @@
 
 <body>
 
-    <div id="levelSelector" 
-        ng-controller="LevelSelectorController" 
-        ng-show="isLevelSelectorVisible"
-        >
-        
-        <h2>How to play:</h2>
-        <div id="infoGraphics">
-            <!--<img src="img/info.png"/>-->
-        </div>
-        <h2>Select level:</h2>
-        <div ng-repeat="level in levelLock" class="levelItem {{level.state}}">
-            <div ng-show="level.state == 'unlocked'" ng-click="startLevel($index)">{{level.text}}</div>
-            <div ng-show="level.state == 'locked'"><i class="fa fa-lock"></i></div>
-        </div>
-        <div class="clearfix"></div>
+<!-- Level Selector -->
+<div id="levelSelector" 
+    ng-controller="LevelSelectorController" 
+    ng-show="isLevelSelectorVisible"
+    >
+    
+    <h2>How to play:</h2>
+    <div id="infoGraphics">
+        <!--<img src="img/info.png"/>-->
     </div>
-
-<div id="mainContent" ng-controller="PexesoController" ng-show="isLevelVisible" ng-style="containerStyle">
-
-    <flippy ng-repeat="card in board" 
-    class="fancy"
-    ng-class="card.flipState"
-    ng-click="selectCard(card)"
-    ng-style="cardStyle"
-    flip-duration="800"
-    timing-function="ease-in-out">
-
-        <flippy-front>
-            <span class="cardHelper"></span><img ng-src="img/cards/question.png">
-        </flippy-front>
-
-        <flippy-back>
-            <span class="cardHelper"></span><img ng-src="img/cards/{{card.cardId}}.png" ng-show="card.cardType == 'picture'">
-            <div ng-hide="card.cardType == 'picture'">{{card.card['en-US']}}</div>
-        </flippy-back>
-        
-
-    </flippy>
+    <h2>Select level:</h2>
+    <div ng-repeat="level in levelLock" class="levelItem {{level.state}}">
+        <div ng-show="level.state == 'unlocked'" ng-click="startLevel($index)">{{level.text}}</div>
+        <div ng-show="level.state == 'locked'"><i class="fa fa-lock"></i></div>
+    </div>
+    <div class="clearfix"></div>
 </div>
 
+<!-- Game board -->
+<div ng-controller="PexesoController" ng-show="isLevelVisible">
+    <div id="navigationBar">
+        <div>
+            <a class="navigationButton" ng-click="cancelLevel()">
+                <i class="fa fa-arrow-left" ></i></a>
+                <span id="levelTitle">Level {{currentLevel.levelName}}</span>
+        </div>
+    </div>
 
+    <div id="mainContent" ng-style="containerStyle">
+    
+        <flippy ng-repeat="card in board" 
+        class="fancy"
+        ng-class="card.flipState"
+        ng-click="selectCard(card)"
+        ng-style="cardStyle"
+        flip-duration="800"
+        timing-function="ease-in-out">
+    
+            <flippy-front>
+                <span class="cardHelper"></span><img ng-src="img/cards/question.png">
+            </flippy-front>
+    
+            <flippy-back>
+                <span class="cardHelper"></span><img ng-src="img/cards/{{card.cardId}}.png" ng-show="card.cardType == 'picture'">
+                <div ng-hide="card.cardType == 'picture'">{{card.card['en-US']}}</div>
+            </flippy-back>
+            
+    
+        </flippy>
+    </div>
+</div>
+
+<!-- Level complete panel -->
 <div id="levelCompleteContent" ng-controller="LevelCompleteController" ng-show="isLevelCompleteVisible">
    <div id="congratulation">Congratulations!</div>
         <div>
