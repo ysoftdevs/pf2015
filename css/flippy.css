@@ -96,7 +96,7 @@ flippy.fancy flippy-front {
   width: inherit;
   height: inherit;
   border: 1px solid #ccc;
-  background: white;
+  background: #FAE944;
   text-align: center;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
 }
