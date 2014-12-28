@@ -68,9 +68,13 @@ flippy.fancy {
   position: relative;
   font-size: .8em;
   cursor: pointer;
-  width: 150px;
-  height: 150px;
 }
+
+flippy.fancy { 
+  width: 60px;
+  height: 60px;
+}
+
 flippy.fancy img {
   width:auto;
   max-width:100%;

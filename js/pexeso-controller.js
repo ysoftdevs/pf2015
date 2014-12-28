@@ -8,8 +8,19 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     // How many cards must be found as the same.
     $scope.chainLength = 2;
     
-    // Whic card types are active
+    // Which card types are active
     $scope.currentCardTypes = [ 'picture', 'picture' ];
+    
+    // Fit defined number of items on screen
+    $scope.containerStyle = {
+        "max-width": "280px"
+    };
+    
+    // Card style - define dimensions
+    $scope.cardStyle = {
+        width: "60px",
+        height: "60px"
+    };
     
     /**
      * Level descriptor:
@@ -25,35 +36,54 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     $scope.levels = [
         {
             totalCards: 2*2,
+            cardsPerRow: 2,
             chainLength: 2,
             cardTypes: ['picture', 'picture']
         }, 
         {
-            totalCards: 4*4, 
+            totalCards: 3*3,
+            cardsPerRow: 3,
+            chainLength: 3,
+            cardTypes: ['picture', 'picture', 'picture']
+        },
+        {
+            totalCards: 4*4,
+            cardsPerRow: 4,
+            chainLength: 4,
+            cardTypes: ['picture', 'picture', 'picture', 'picture'] 
+        }, {
+            totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
             cardTypes: ['picture', 'picture'] 
         }, {
             totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
             cardTypes: ['picture', 'en-US']
         }, {
             totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
             cardTypes: ['picture', 'oneLanguage']
         }, {
             totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
             cardTypes: ['picture', 'randomLanguage']
         }, {
             totalCards: 3*3,
+            cardsPerRow: 3,
             chainLength: 3,
             cardTypes: ['picture', 'picture', 'picture']
         }, {
             totalCards: 3*3,
+            cardsPerRow: 3,
             chainLength: 3,
             cardTypes: ['picture', 'randomLanguage', 'randomLanguage']
         }, {
             totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 4,
             cardTypes: ['picture', 'randomLanguage', 'randomLanguage', 'randomLanguage']
         }
@@ -128,7 +158,6 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     
     
     $scope.cards = $scope.basicCards;
-    $scope.maxSelected = 2;
     
     $scope.board = [];
     
@@ -202,8 +231,8 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     $scope.areAllSelectedSame = function() {
         var previous = null;
         
-        // At least two cards must match
-        if ($scope.selectedCards.length < 2) {
+        // At least n-cards must match
+        if ($scope.selectedCards.length < $scope.chainLength) {
             return false;
         }
         
@@ -253,7 +282,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         $scope.selectionCounter += 1;
         
 
-        if ($scope.selectionCounter == $scope.maxSelected + 1) {
+        if ($scope.selectionCounter == $scope.chainLength + 1) {
             $scope.resetSelection();
             return;
         } else {
@@ -270,12 +299,40 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             if ($scope.isLevelComplete()) {
                 $timeout($scope.completeLevel, 1000);
             }
-        } else if ($scope.selectionCounter == $scope.maxSelected) {
+        } else if ($scope.selectionCounter == $scope.chainLength) {
             $timeout($scope.resetSelection, 1000);
         } 
         
     };
     
+    
+    /**
+     * Adjust size of card
+     */
+    $scope.computeCardSize = function(cardsPerRow) {
+        var cardSize = Math.floor(Math.min(window.innerWidth, window.innerHeight) / cardsPerRow) - 20;
+        $scope.cardStyle = {
+            width: cardSize + "px",
+            height: cardSize + "px"
+        };
+        
+        var paddingLeft = Math.floor((window.innerWidth - (cardSize + 10) * cardsPerRow) / 2);
+        var paddingTop = Math.floor((window.innerHeight - (cardSize + 10) * cardsPerRow) / 2);
+        
+        if (paddingLeft < 0) {
+            paddingLeft = 0;
+        }
+        
+        if (paddingTop < 0) {
+            paddingTop = 0;
+        }
+        
+        $scope.containerStyle = {
+            "max-width": (cardSize + 20) * cardsPerRow  + "px",
+            "padding-left": paddingLeft + "px",
+            "padding-top": paddingTop + "px"
+        };
+    };
     
     /**
      * Start Level
@@ -284,6 +341,8 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         $scope.levelIndex = args.levelIndex;
         $scope.currentLevel = $scope.levels[$scope.levelIndex];
         $scope.currentCardTypes = $scope.currentLevel.cardTypes;
+        $scope.computeCardSize($scope.currentLevel.cardsPerRow);
+        $scope.chainLength = $scope.currentLevel.chainLength;
         $scope.generateBoard($scope.currentLevel.totalCards);
         $scope.isLevelVisible = true;
     };

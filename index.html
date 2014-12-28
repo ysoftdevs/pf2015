@@ -40,14 +40,13 @@
         <div class="clearfix"></div>
     </div>
 
-
-<div id="mainContent" ng-controller="PexesoController" ng-show="isLevelVisible">
+<div id="mainContent" ng-controller="PexesoController" ng-show="isLevelVisible" ng-style="containerStyle">
 
     <flippy ng-repeat="card in board" 
     class="fancy"
     ng-class="card.flipState"
     ng-click="selectCard(card)"
-    
+    ng-style="cardStyle"
     flip-duration="800"
     timing-function="ease-in-out">
 
@@ -59,6 +58,7 @@
             <span class="cardHelper"></span><img ng-src="img/cards/{{card.cardId}}.png" ng-show="card.cardType == 'picture'"></span>
             <div ng-hide="card.cardType == 'picture'">{{card.card['en-US']}}</div>
         </flippy-back>
+        
 
     </flippy>
 </div>
