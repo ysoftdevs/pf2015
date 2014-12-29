@@ -1,7 +1,10 @@
-body {
+BODY, HTML {
 	margin: 0;
 	background: lightyellow;
-	font-family: 		Arial, Verdana, sans-serif;
+	font-family: Arial, Verdana, sans-serif;
+	height: 100%;
+	width: 100%;
+    overflow: hidden;
 }
 
 #mainContent {
@@ -64,4 +67,18 @@ body {
 
 .textCardLabel {
 	margin-top: 15%;
+}
+
+#levelComplete {
+    position: relative;
+    z-index: 200;
+    background:rgba(0,0,0,0.7);
+    text-align: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+#congratulation {
+    font-size: 3em;
+    padding-bottom: 1em;
 }
