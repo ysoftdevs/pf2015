@@ -80,7 +80,7 @@
 <div id="levelCompleteContent" ng-controller="LevelCompleteController" ng-show="isLevelCompleteVisible">
    <div id="congratulation">Congratulations!</div>
         <div>
-            <a class="levelButton" id="replayButton" ng-click="restartLevel()"><i class="fa fa-repeat"></i>Play again</a>
+            <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i>Play again</a>
             <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i>Next level</a>
         </div>
         <div>

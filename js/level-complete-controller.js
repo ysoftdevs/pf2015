@@ -9,6 +9,7 @@ angular.module('level-complete', [])
      
     $scope.completeLevel = function(event, args) {
         $scope.isLevelCompleteVisible = true;
+        $scope.isFinalScreenVisible = args.isFinalLevel;
         $scope.levelIndex = args.levelIndex;
     };
      

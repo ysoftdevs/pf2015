@@ -92,21 +92,22 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             chainLength: 2,
             cardSet: alphabetCards,
             cardTypes: ['key', 'morse']
-        }, {
-            levelName: "05: Picture + Word",
+        },/* {
+            levelName: "09: Picture + Word",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
             cardSet: basicCards,
             cardTypes: ['picture', 'en-US']
         }, {
-            levelName: "06: Picture + Foreign Word",
+            levelName: "10: Foreign Word",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
             cardSet: basicCards,
             cardTypes: ['picture', 'oneLanguage']
         }, {
+            levelName: "10: Random Word",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
@@ -125,11 +126,19 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardSet: basicCards,
             cardTypes: ['picture', 'randomLanguage', 'randomLanguage']
         }, {
-            totalCards: 4*4,
-            cardsPerRow: 4,
-            chainLength: 4,
+            levelName: "10: Grand MIX",
+            totalCards: 5*5,
+            cardsPerRow: 5,
+            chainLength: 2,
             cardSet: basicCards,
             cardTypes: ['picture', 'randomLanguage', 'randomLanguage', 'randomLanguage']
+        },*/ {
+            levelName: "Finale",
+            totalCards: 7*1,
+            cardsPerRow: 7,
+            chainLength: 7,
+            cardSet: finaleCards,
+            cardTypes: ['1','2','3','4','5','6','7']
         }
     ];
     
@@ -167,6 +176,10 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         };
     };
     
+    $scope.isFinallevel = function() {
+        return ($scope.levelIndex == $scope.levels.length - 1);
+    };
+    
     /**
      * Generate game board.
      */
@@ -200,13 +213,18 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             }
         }
         
+        var isFinalLevel = $scope.isFinallevel();
         for (var index = 0; index < totalCount; index++) {
-            var coordinate = Math.floor((Math.random()* stack.length));
+            var coordinate = 0;
+            
+            if (!isFinalLevel) {
+                coordinate = Math.floor((Math.random()* stack.length));
+            }
+            
             $scope.board.push(stack[coordinate]);
             stack.splice(coordinate, 1);
         }
     };
-        
         
     $scope.selectionCounter = 0;    
     
@@ -357,7 +375,8 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
      */
     $scope.completeLevel = function() {
         var args = {
-            levelIndex: $scope.levelIndex
+            levelIndex: $scope.levelIndex,
+            isFinalLevel: $scope.isFinallevel()
         };
         $rootScope.$emit('completeLevel', args);
     };
