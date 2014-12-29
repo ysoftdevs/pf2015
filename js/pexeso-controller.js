@@ -59,22 +59,22 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['picture', 'picture', 'picture', 'picture'] 
         }, {
             levelName: "04: Simple Math",
-            totalCards: 3*2,
-            cardsPerRow: 3,
+            totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
             cardSet: mathCards,
             cardTypes: ['arabic', 'math']
         }, {
             levelName: "05: Roman",
-            totalCards: 3*2,
-            cardsPerRow: 3, 
+            totalCards: 4*4,
+            cardsPerRow: 4, 
             chainLength: 2,
             cardSet: mathCards,
             cardTypes: ['arabic', 'roman']
         }, {
             levelName: "06: Japanese",
-            totalCards: 3*2,
-            cardsPerRow: 3,
+            totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
             cardSet: mathCards,
             cardTypes: ['arabic', 'japanese']

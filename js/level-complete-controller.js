@@ -30,6 +30,11 @@ angular.module('level-complete', [])
         $rootScope.$emit('startLevel', args);
     };
      
+    $scope.cancelLevel = function() {
+        $scope.isLevelCompleteVisible = false;
+    };
+     
     $rootScope.$on('completeLevel', $scope.completeLevel);
+    $rootScope.$on('cancelLevel', $scope.cancelLevel);
     
 });
