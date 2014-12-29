@@ -86,12 +86,12 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardSet: mathCards,
             cardTypes: ['arabic', 'math', 'roman', 'japanese']
         },{
-            levelName: "04: Picture + Word",
-            totalCards: 2*2,
-            cardsPerRow: 2,
+            levelName: "08: Morse",
+            totalCards: 4*4,
+            cardsPerRow: 4,
             chainLength: 2,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'en-US']
+            cardSet: alphabetCards,
+            cardTypes: ['key', 'morse']
         }, {
             levelName: "05: Picture + Word",
             totalCards: 4*4,
@@ -190,7 +190,11 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
                     tempCard.label = "";
                 } else {
                     tempCard.image = 'question';
-                    tempCard.label = tempCard.card.card[tempCard.cardType];
+                    if (tempCard.cardType == 'key') {
+                        tempCard.label = tempCard.cardId;
+                    } else {
+                        tempCard.label = tempCard.card.card[tempCard.cardType];
+                    }
                 }
                 stack.push(tempCard);
             }
