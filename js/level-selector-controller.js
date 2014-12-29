@@ -19,7 +19,11 @@ angular.module('level-selector', ['LocalStorageModule'])
             {state:'locked', text:'PF'}
         ];
 
-    $scope.startLevel = function(levelIndex) {
+    $scope.startLevel = function(state, levelIndex) {
+        if (state != 'unlocked') {
+            return;
+        }
+        
         $scope.isLevelSelectorVisible = false;
         var args = {
             levelIndex: levelIndex

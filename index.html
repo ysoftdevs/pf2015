@@ -38,8 +38,8 @@
         <!--<img src="img/info.png"/>-->
     </div>
     <h2>Select level:</h2>
-    <div ng-repeat="level in levelLock" class="levelItem {{level.state}}">
-        <div ng-show="level.state == 'unlocked'" ng-click="startLevel($index)">{{level.text}}</div>
+    <div ng-repeat="level in levelLock" class="levelItem {{level.state}}"  ng-click="startLevel(level.state, $index)">
+        <div ng-show="level.state == 'unlocked'" >{{level.text}}</div>
         <div ng-show="level.state == 'locked'"><i class="fa fa-lock"></i></div>
     </div>
     <div class="clearfix"></div>
@@ -80,11 +80,11 @@
 </div>
 
 <!-- Level complete panel -->
-<div id="levelCompleteContent" ng-controller="LevelCompleteController" ng-show="isLevelCompleteVisible">
+<div id="levelComplete" ng-controller="LevelCompleteController" ng-show="isLevelCompleteVisible">
    <div id="congratulation">Congratulations!</div>
-        <div>
-            <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i>Play again</a>
-            <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i>Next level</a>
+        <div class="levelCompleteButtons">
+            <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i> Play again</a>
+            <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i> Next level</a>
         </div>
         <div>
             <a class="levelButton" id="webButton" ng-click="openUrl(constellation.wiki)" ng-show="isFinalScreenVisible">

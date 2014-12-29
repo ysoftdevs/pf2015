@@ -74,11 +74,35 @@ BODY, HTML {
     z-index: 200;
     background:rgba(0,0,0,0.7);
     text-align: center;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    color: white;
+    height: 10em;
 }
 
 #congratulation {
-    font-size: 3em;
-    padding-bottom: 1em;
+	top: 1em;
+    font-size: 2em;
+ 	width: 100%;
+ 	text-align: center;
+    position: absolute;
+}
+
+.levelCompleteButtons {
+	position: absolute;
+	top: 6em;
+	width: 100%;
+	text-align: center;
+}
+
+.levelButton {
+    font-size: 1.2em;
+    background: #111;
+    border: 1px solid lightgray;
+    padding: 0.5em;
+    margin: 1em;
+    cursor: pointer;
+}
+
+.levelButton:hover {
+	border: 1px solid yellow;
+	color: yellow;
 }
