@@ -35,59 +35,100 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
      */
     $scope.levels = [
         {
-            levelName: "01: 2x2 Picture",
+            levelName: "01: 2 Pictures",
             totalCards: 2*2,
             cardsPerRow: 2,
             chainLength: 2,
+            cardSet: basicCards,
             cardTypes: ['picture', 'picture']
         }, 
         {
-            levelName: "02: 3x3 Picture",
+            levelName: "02: 3 Pictures",
             totalCards: 3*3,
             cardsPerRow: 3,
             chainLength: 3,
+            cardSet: basicCards,
             cardTypes: ['picture', 'picture', 'picture']
         },
         {
-            levelName: "03: 4x4 Picture",
+            levelName: "03: 4 Pictures",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 4,
+            cardSet: basicCards,
             cardTypes: ['picture', 'picture', 'picture', 'picture'] 
         }, {
-            totalCards: 4*4,
-            cardsPerRow: 4,
+            levelName: "04: Simple Math",
+            totalCards: 3*2,
+            cardsPerRow: 3,
             chainLength: 2,
-            cardTypes: ['picture', 'picture'] 
+            cardSet: mathCards,
+            cardTypes: ['arabic', 'math']
         }, {
+            levelName: "05: Roman",
+            totalCards: 3*2,
+            cardsPerRow: 3, 
+            chainLength: 2,
+            cardSet: mathCards,
+            cardTypes: ['arabic', 'roman']
+        }, {
+            levelName: "06: Japanese",
+            totalCards: 3*2,
+            cardsPerRow: 3,
+            chainLength: 2,
+            cardSet: mathCards,
+            cardTypes: ['arabic', 'japanese']
+        }, {
+            levelName: "07: 4x MIX",
             totalCards: 4*4,
             cardsPerRow: 4,
+            chainLength: 4,
+            cardSet: mathCards,
+            cardTypes: ['arabic', 'math', 'roman', 'japanese']
+        },{
+            levelName: "04: Picture + Word",
+            totalCards: 2*2,
+            cardsPerRow: 2,
             chainLength: 2,
+            cardSet: basicCards,
             cardTypes: ['picture', 'en-US']
         }, {
+            levelName: "05: Picture + Word",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
+            cardSet: basicCards,
+            cardTypes: ['picture', 'en-US']
+        }, {
+            levelName: "06: Picture + Foreign Word",
+            totalCards: 4*4,
+            cardsPerRow: 4,
+            chainLength: 2,
+            cardSet: basicCards,
             cardTypes: ['picture', 'oneLanguage']
         }, {
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
+            cardSet: basicCards,
             cardTypes: ['picture', 'randomLanguage']
         }, {
             totalCards: 3*3,
             cardsPerRow: 3,
             chainLength: 3,
+            cardSet: basicCards,
             cardTypes: ['picture', 'picture', 'picture']
         }, {
             totalCards: 3*3,
             cardsPerRow: 3,
             chainLength: 3,
+            cardSet: basicCards,
             cardTypes: ['picture', 'randomLanguage', 'randomLanguage']
         }, {
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 4,
+            cardSet: basicCards,
             cardTypes: ['picture', 'randomLanguage', 'randomLanguage', 'randomLanguage']
         }
     ];
@@ -106,61 +147,9 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         }
     };
     
-    $scope.basicCards = {
-        'cherry' : {
-            'cs-CZ': 'třešnička',
-            'en-US': 'cherry',
-            'sk-SK': 'čerešňa'
-        },
-        'cheese' : {
-            'cs-CZ': 'sýr',
-            'en-US': 'cheese',
-            'sk-SK': 'syr'
-        },
-        'carrot' : {
-            'cs-CZ': 'mrkev',
-            'en-US': 'carrot',
-            'sk-SK': 'mrkva'
-        }, 
-        'dwarf': {
-            'cs-CZ': 'trpaslík',
-            'en-US': 'dwarf',
-            'sk-SK': 'trpaslík'
-        },
-        'barrel': {
-            'cs-CZ': 'sud',
-            'en-US': 'barrel',
-            'sk-SK': 'sud'
-        },
-        'butterfly': {
-            'cs-CZ': 'motýl',
-            'en-US': 'butterfly',
-            'sk-SK': 'motýľ'
-        },
-        'ghost': {
-            'cs-CZ': 'duch',
-            'en-US': 'ghost',
-            'sk-SK': 'duch'
-        },
-        'rose': {
-            'cs-CZ': 'růže',
-            'en-US': 'rose',
-            'sk-SK': 'ruža'
-        },
-        'sun': {
-            'cs-CZ': 'slunce',
-            'en-US': 'sun',
-            'sk-SK': 'slnko'
-        },
-        'cloud': {
-            'cs-CZ': 'oblak',
-            'en-US': 'cloud',
-            'sk-SK': 'oblak'
-        }
-    };
     
     
-    $scope.cards = $scope.basicCards;
+    $scope.cards = basicCards;
     
     $scope.board = [];
     
@@ -185,7 +174,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         $scope.board = [];
         var fullStack = []
         var stack = [];
-        angular.forEach($scope.basicCards, function(card, cardId) {
+        angular.forEach($scope.currentLevel.cardSet, function(card, cardId) {
             fullStack.push($scope.getCard(card, cardId, 1));
         });
         
@@ -196,6 +185,13 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             for (var instanceIndex = 0; instanceIndex < $scope.chainLength; instanceIndex++) {
                 var tempCard = $scope.getCard(card, card.cardId, instanceIndex + 1);
                 tempCard.cardType = $scope.currentCardTypes[instanceIndex];
+                if (tempCard.cardType == 'picture') {
+                    tempCard.image = tempCard.cardId;
+                    tempCard.label = "";
+                } else {
+                    tempCard.image = 'question';
+                    tempCard.label = tempCard.card.card[tempCard.cardType];
+                }
                 stack.push(tempCard);
             }
         }
