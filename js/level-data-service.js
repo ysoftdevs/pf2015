@@ -55,7 +55,7 @@ var basicCards = {
 var mathCards = {
     'zero': {
         'arabic': '0',
-        'roman': 'nulla',
+        'roman': ' ',
         'math': '1-1',
         'japanese': '〇'
     },

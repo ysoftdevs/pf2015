@@ -332,9 +332,16 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
      */
     $scope.computeCardSize = function(cardsPerRow) {
         var cardSize = Math.floor(Math.min(window.innerWidth, window.innerHeight) / cardsPerRow) - 20;
+        
+        var fontSize = Math.floor(cardSize * 0.6);
+        if (fontSize < 12) {
+            fontSize = 12;
+        }
+        
         $scope.cardStyle = {
             width: cardSize + "px",
-            height: cardSize + "px"
+            height: cardSize + "px",
+            "font-size": fontSize + "px"
         };
         
         var paddingLeft = Math.floor((window.innerWidth - (cardSize + 10) * cardsPerRow) / 2);

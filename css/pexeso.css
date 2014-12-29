@@ -6,7 +6,6 @@ body {
 
 #mainContent {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: xx-large;
 	font-weight: bold;
 	border-radius: 4px;
 	
@@ -57,4 +56,12 @@ body {
 
 #levelTitle {
 	float:right;
+}
+
+.textCard {
+	height: 100%;
+}
+
+.textCardLabel {
+	margin-top: 15%;
 }

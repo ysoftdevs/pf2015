@@ -68,7 +68,7 @@
     
             <flippy-back>
                 <span class="cardHelper" ng-show="card.cardType == 'picture'"></span><img ng-src="img/cards/{{card.image}}.png" ng-show="card.cardType == 'picture'">
-                <div ng-hide="card.cardType == 'picture'">{{card.label}}</div>
+                <div class="textCard" ng-hide="card.cardType == 'picture'"><div class="textCardLabel">{{card.label}}</div></div>
             </flippy-back>
             
     
