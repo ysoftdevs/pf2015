@@ -116,7 +116,7 @@ var mathCards = {
     'ten': {
         'arabic': '10',
         'roman': 'X',
-        'math': '4*2+2',
+        'math': '5*2',
         'japanese': '十'
     }
 };

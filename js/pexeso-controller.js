@@ -58,7 +58,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardSet: basicCards,
             cardTypes: ['picture', 'picture', 'picture', 'picture'] 
         }, {
-            levelName: "04: Simple Math",
+            levelName: "04: Math",
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,

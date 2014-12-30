@@ -48,11 +48,9 @@
 <!-- Game board -->
 <div ng-controller="PexesoController" ng-show="isLevelVisible">
     <div id="navigationBar">
-        <div>
-            <a class="navigationButton" ng-click="cancelLevel()">
-                <i class="fa fa-arrow-left" ></i></a>
-                <span id="levelTitle">Level {{currentLevel.levelName}}</span>
-        </div>
+        <a class="navigationButton" ng-click="cancelLevel()">
+            <i class="fa fa-arrow-left" ></i></a>
+        <div id="levelTitle">{{currentLevel.levelName}}</div>
     </div>
 
     <div id="mainContent" ng-style="containerStyle">
