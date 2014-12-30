@@ -97,9 +97,12 @@
             <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i> Play again</a>
             <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i> Next level</a>
         </div>
-        <div class="levelCompleteButtons">
-            <a class="levelButton" id="webButton" ng-click="openUrl('http://www.ysofters.com/2014/12/30/pf2015')" ng-show="isFinalScreenVisible">
+        <div class="levelCompleteButtons" ng-show="isFinalScreenVisible">
+            <div>Wishing you all the best this New Year!</div>
+            <div class="signature"> - Juraj</div>
+            <div><a class="levelButton" id="webButton" ng-click="openUrl('http://www.ysofters.com/2014/12/30/pf2015')">
                 <i class="fa fa-thumbs-up" ></i> Visit PF 2015 website</a>
+            </div>
         </div>
     </div>
 </div>

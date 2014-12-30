@@ -11,8 +11,9 @@ BODY, HTML {
 	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	border-radius: 4px;
-	
+	padding-top: 0;
 }
+
 .buttonStyle {
 	border-radius: 4px;
 	border: thin solid #F0E020;
@@ -81,7 +82,7 @@ BODY, HTML {
     background:rgba(0,0,0,0.7);
     text-align: center;
     color: white;
-    height: 10em;
+    height: 100%;
 }
 
 #congratulation {
@@ -126,4 +127,8 @@ BODY, HTML {
 
 .instructionSymbols {
 	padding-top: 2em;
+}
+
+.signature {
+	padding-bottom: 2em;
 }

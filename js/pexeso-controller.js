@@ -317,7 +317,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         $scope.containerStyle = {
             "max-width": (cardSize + 20) * cardsPerRow  + "px",
             "padding-left": paddingLeft + "px",
-            "padding-top": paddingTop + "px"
+            "margin-top": paddingTop + "px"
         };
     };
     
