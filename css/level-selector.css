@@ -33,6 +33,7 @@
 #infoGraphics {
     width: 100%;
     text-align: center;
+    font-size: xx-large;
 }
 
 
@@ -43,4 +44,9 @@
     left: 0px;
     right: 0px;
     bottom: 0px;
+}
+
+
+.instructionGreen {
+    color: darkgreen;
 }

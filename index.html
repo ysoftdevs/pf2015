@@ -37,11 +37,11 @@
     ng-show="isLevelSelectorVisible"
     >
     
-    <h2>How to play:</h2>
+    <h2 class="levelSelectorTitle">How to play</h2>
     <div id="infoGraphics">
-        <!--<img src="img/info.png"/>-->
+        <div><i class="fa fa-picture-o instructionGreen"></i> + <i class="fa fa-picture-o instructionGreen"></i> = <i class="fa fa-check-square-o instructionGreen"></i></div>
     </div>
-    <h2>Select level:</h2>
+    <h2 class="levelSelectorTitle">Select level</h2>
     <div ng-repeat="level in levelLock" class="levelItem {{level.state}}"  ng-click="startLevel(level.state, $index)">
         <div ng-show="level.state == 'unlocked'" >{{level.text}}</div>
         <div ng-show="level.state == 'locked'"><i class="fa fa-lock"></i></div>
