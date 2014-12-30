@@ -57,7 +57,16 @@
         <div id="levelTitle"><span id="levelWord">Level </span>{{currentLevel.levelName}}</div>
     </div>
 
-    <div id="mainContent" ng-style="containerStyle">
+    <!-- Start level instructions -->
+    <div class="startLevelInstructions" ng-show="isStartConfirmation">
+        <div class="instructionSymbols">
+            <span ng-repeat="icon in instructions track by $index"> <i class="fa" ng-class="icon"></i></span>
+        </div>
+        <div id="startLevel" class="levelButton" ng-click="playLevel()" >
+                <i class="fa fa-flag-checkered"></i> Start</div>
+    </div>
+    
+    <div id="mainContent" ng-style="containerStyle" ng-hide="isStartConfirmatioxn">
     
         <flippy ng-repeat="card in board" 
         class="fancy"

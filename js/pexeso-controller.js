@@ -3,6 +3,11 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     
     $scope.isLevelVisible = false;
     
+    // Is start information with confirmation visible
+    $scope.isStartConfirmation = true;
+    
+    $scope.instructions = [];
+    
     $scope.levelIndex = 0;
     
     // How many cards must be found as the same.
@@ -35,6 +40,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     $scope.levels = [
         {
             levelName: "01: 2 Pictures",
+            instructions: ['fa-picture-o', 'fa-plus', 'fa-picture-o'],
             totalCards: 2*2,
             cardsPerRow: 2,
             chainLength: 2,
@@ -43,6 +49,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         }, 
         {
             levelName: "02: 3 Pictures",
+            instructions: ['fa-picture-o', 'fa-plus', 'fa-picture-o', 'fa-plus', 'fa-picture-o'],
             totalCards: 3*3,
             cardsPerRow: 3,
             chainLength: 3,
@@ -51,6 +58,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         },
         {
             levelName: "03: 4 Pictures",
+            instructions: ['fa-picture-o', 'fa-plus', 'fa-picture-o', 'fa-plus', 'fa-picture-o', 'fa-plus', 'fa-picture-o'],
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 4,
@@ -58,6 +66,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['picture', 'picture', 'picture', 'picture'] 
         }, {
             levelName: "04: Math",
+            instructions: ['fa-circle-o', 'fa-plus', 'fa-calculator'],
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
@@ -65,6 +74,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['arabic', 'math']
         }, {
             levelName: "05: Roman",
+            instructions: ['fa-circle-o', 'fa-plus', 'fa-file-excel-o'],
             totalCards: 4*4,
             cardsPerRow: 4, 
             chainLength: 2,
@@ -72,6 +82,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['arabic', 'roman']
         }, {
             levelName: "06: Japanese",
+            instructions: ['fa-circle-o', 'fa-plus', 'fa-jpy'],
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
@@ -79,6 +90,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['arabic', 'japanese']
         }, {
             levelName: "07: 4x MIX",
+            instructions: ['fa-circle-o', 'fa-plus', 'fa-calculator', 'fa-plus', 'fa-file-excel-o', 'fa-plus', 'fa-jpy'],
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 4,
@@ -86,6 +98,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['arabic', 'math', 'roman', 'japanese']
         },{
             levelName: "08: Morse",
+            instructions: ['fa-font', 'fa-plus', 'fa-circle', 'fa-minus'],
             totalCards: 4*4,
             cardsPerRow: 4,
             chainLength: 2,
@@ -93,6 +106,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             cardTypes: ['key', 'morse']
         }, {
             levelName: "Finale",
+            instructions: ['fa-smile-o'],
             totalCards: 7*1,
             cardsPerRow: 7,
             chainLength: 7,
@@ -314,13 +328,19 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         $scope.levelIndex = args.levelIndex;
         $scope.currentLevel = $scope.levels[$scope.levelIndex];
         $scope.currentCardTypes = $scope.currentLevel.cardTypes;
+        $scope.instructions = $scope.currentLevel.instructions;
         $scope.chainLength = $scope.currentLevel.chainLength;
         
         $scope.computeCardSize($scope.currentLevel.cardsPerRow);
         $scope.generateBoard($scope.currentLevel.totalCards);
         
         $scope.isLevelVisible = true;
+        $scope.isStartConfirmation= true;
     };
+    
+    $scope.playLevel = function() {
+        $scope.isStartConfirmation = false;
+    }
     
     /**
      * Level complete - display level outro screen.

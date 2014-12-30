@@ -101,8 +101,8 @@ BODY, HTML {
 
 .levelButton {
     font-size: 1.2em;
-    background: #111;
-    border: 1px solid lightgray;
+    background: gray;
+    border: 1px solid gray;
     padding: 0.5em;
     margin: 1em;
     cursor: pointer;
@@ -111,4 +111,19 @@ BODY, HTML {
 .levelButton:hover {
 	border: 1px solid yellow;
 	color: yellow;
+}
+
+.startLevelInstructions {
+	color: white;
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	font-size: 2.5em;
+	text-align: center;
+	background: rgba(0,0,0,0.7);
+}
+
+.instructionSymbols {
+	padding-top: 2em;
 }
