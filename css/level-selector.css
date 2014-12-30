@@ -21,6 +21,13 @@
     background:rgba(0,0,0,0.5);
 }
 
+@media screen and (max-width: 340px) {
+    .levelItem {
+        width: 2em;
+        height: 1.4em;
+    }
+}
+
 .locked {
     padding-top: 0.3em;
     padding-bottom: 0.8em;
@@ -44,7 +51,7 @@
     left: 0px;
     right: 0px;
     bottom: 0px;
-    font-size: 4em;
+    font-size: 3em;
 }
 
 .badge {

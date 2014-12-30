@@ -156,6 +156,13 @@ BODY, HTML {
 	overflow: auto;
 }
 
+
+@media screen and (max-width: 340px) {
+	.info {
+		font-size: 0.8em;
+	}
+}
+
 .infoContent {
 	padding-left: 2em;
 }
