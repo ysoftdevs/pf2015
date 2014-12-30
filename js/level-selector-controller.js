@@ -12,11 +12,7 @@ angular.module('level-selector', ['LocalStorageModule'])
             {state:'locked', text:'6'},
             {state:'locked', text:'7'},
             {state:'locked', text:'8'},
-            {state:'locked', text:'9'},
-            {state:'locked', text:'10'},
-            {state:'locked', text:'11'},
-            {state:'locked', text:'12'},
-            {state:'locked', text:'PF'}
+            {state:'locked', text:'PF'},
         ];
 
     $scope.startLevel = function(state, levelIndex) {
@@ -62,7 +58,12 @@ angular.module('level-selector', ['LocalStorageModule'])
         if (!value) {
             $scope.storeConfiguration();
         } else {
-            $scope.levelLock = value;
+            // Load only state. Do not load titles or more items than are available.
+            var limit = Math.min(value.length, $scope.levelLock.length);
+            
+            for (var index = 0; index < limit; index++) {
+                $scope.levelLock[index]['state'] = value[index]['state'];
+            }
         }
     };
 

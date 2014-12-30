@@ -29,9 +29,8 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
      * chainLength - How many cards must be found from the same kind
      * cardType - Define type of game
      *  - picture - display image of item
-     *  - "languageCode" - display text in specified language
-     *  - oneLanguage - pickup one language for each card on the beginning of game
-     *  - randomLanguage - each turn of card selects different language for the same item
+     *  - key - display ID as text
+     *  - "name" - use text field from card set
      */
     $scope.levels = [
         {
@@ -92,47 +91,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
             chainLength: 2,
             cardSet: alphabetCards,
             cardTypes: ['key', 'morse']
-        },/* {
-            levelName: "09: Picture + Word",
-            totalCards: 4*4,
-            cardsPerRow: 4,
-            chainLength: 2,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'en-US']
         }, {
-            levelName: "10: Foreign Word",
-            totalCards: 4*4,
-            cardsPerRow: 4,
-            chainLength: 2,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'oneLanguage']
-        }, {
-            levelName: "10: Random Word",
-            totalCards: 4*4,
-            cardsPerRow: 4,
-            chainLength: 2,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'randomLanguage']
-        }, {
-            totalCards: 3*3,
-            cardsPerRow: 3,
-            chainLength: 3,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'picture', 'picture']
-        }, {
-            totalCards: 3*3,
-            cardsPerRow: 3,
-            chainLength: 3,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'randomLanguage', 'randomLanguage']
-        }, {
-            levelName: "10: Grand MIX",
-            totalCards: 5*5,
-            cardsPerRow: 5,
-            chainLength: 2,
-            cardSet: basicCards,
-            cardTypes: ['picture', 'randomLanguage', 'randomLanguage', 'randomLanguage']
-        },*/ {
             levelName: "Finale",
             totalCards: 7*1,
             cardsPerRow: 7,
