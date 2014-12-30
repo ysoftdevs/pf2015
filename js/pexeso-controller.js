@@ -263,7 +263,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         if ($scope.areAllSelectedSame()) {
             $scope.setSelectionState('solved');
             if ($scope.isLevelComplete()) {
-                $timeout($scope.completeLevel, 3000);
+                $timeout($scope.completeLevel, 2000);
             }
         } else if ($scope.selectionCounter == $scope.chainLength) {
             $timeout($scope.resetSelection, 1000);
