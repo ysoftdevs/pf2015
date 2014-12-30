@@ -61,6 +61,12 @@ BODY, HTML {
 	float:right;
 }
 
+@media (max-width: 340px) {
+	#levelWord {
+		display: none;	
+	}
+}
+
 .textCard {
 	height: 100%;
 }
