@@ -39,7 +39,9 @@
     
     <h2 class="levelSelectorTitle">How to play</h2>
     <div id="infoGraphics">
-        <div><i class="fa fa-picture-o instructionGreen"></i> + <i class="fa fa-picture-o instructionGreen"></i> = <i class="fa fa-check-square-o instructionGreen"></i></div>
+        <div><i class="fa fa-picture-o instructionGreen"></i> 
+        + <i class="fa fa-picture-o instructionGreen"></i> 
+        = <i class="fa fa-check-square-o instructionGreen"></i></div>
     </div>
     <h2 class="levelSelectorTitle">Select level</h2>
     <div ng-repeat="level in levelLock" class="levelItem {{level.state}}"  ng-click="startLevel(level.state, $index)">
@@ -47,11 +49,46 @@
         <div ng-show="level.state == 'locked'"><i class="fa fa-lock"></i></div>
     </div>
     <div class="clearfix"></div>
+    
+    <!-- Badges -->
+    <div id="badges" ng-show="isLevelSelectorVisible">
+        <span class="link" ng-click="showInfo()"><i class="fa fa-info-circle"></i></span>
+        
+        <a class="link" href="https://github.com/ysoftdevs/pf2015">
+            <i class="fa fa-github"></i></a>
+
+        <span class="badge">
+            <a class="link" href="http://www.ysofters.com/2014/12/30/pf2015">
+                <img class="ylogo" alt="Read more at YSofters blog"
+                     src="img/ysoft-logo.png" /></a>
+        </span>
+    </div>
+    
+    <!-- Info -->
+    <div class="info" ng-show="isInfoVisible" ng-click="hideInfo()">
+        <div class="navigationBar">
+        <a class="navigationButton">
+            <i class="fa fa-arrow-left" ></i></a>
+        </div>
+        <div class="infoContent">
+            <h2>PF 2015 - Pexeso Puzzle Game</h2>
+            <div>Author: <a href="http://georgik.sinusgear.com">Juraj Michálek</a></div>
+            <div>Source code: <a href="https://github.com/ysoftdevs/pf2015">github.com/ysoftdevs/pf2015</a></div>
+            <div>Technologies: 
+                <ul>
+                    <li><a href="https://angularjs.org">AngularJS 1.3</a></li>
+                    <li><a href="https://github.com/zwacky/angular-flippy">Angular Flippy</a></li>
+                    <li><a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a></li>
+                </ul>
+            </div>
+            <div>Artwork: CC OpenClips - Pixbay.com (<a href="img/cards/images.txt">list</a>)</div>
+        </div>
+    </div>
 </div>
 
 <!-- Game board -->
 <div ng-controller="PexesoController" ng-show="isLevelVisible">
-    <div id="navigationBar">
+    <div class="navigationBar">
         <a class="navigationButton" ng-click="cancelLevel()">
             <i class="fa fa-arrow-left" ></i></a>
         <div id="levelTitle"><span id="levelWord">Level </span>{{currentLevel.levelName}}</div>
@@ -92,18 +129,18 @@
 
 <!-- Level complete panel -->
 <div class="levelComplete" ng-controller="LevelCompleteController" ng-show="isLevelCompleteVisible">
-   <div id="congratulation">Congratulations!</div>
-        <div class="levelCompleteButtons">
-            <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i> Play again</a>
-            <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i> Next level</a>
+    <div id="congratulation" >Congratulations!</div>
+    <div class="levelCompleteButtons" ng-hide="isFinalScreenVisible">
+        <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i> Play again</a>
+        <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i> Next level</a>
+    </div>
+    <div class="levelCompleteButtonsFinal" ng-show="isFinalScreenVisible">
+        <div>Wishing you all the best this New Year!</div>
+        <div class="signature"> - Juraj</div>
+        <div><a class="levelButton" id="webButton" ng-click="openUrl('http://www.ysofters.com/2014/12/30/pf2015')">
+            <i class="fa fa-thumbs-up" ></i> Visit PF 2015 website</a>
         </div>
-        <div class="levelCompleteButtons" ng-show="isFinalScreenVisible">
-            <div>Wishing you all the best this New Year!</div>
-            <div class="signature"> - Juraj</div>
-            <div><a class="levelButton" id="webButton" ng-click="openUrl('http://www.ysofters.com/2014/12/30/pf2015')">
-                <i class="fa fa-thumbs-up" ></i> Visit PF 2015 website</a>
-            </div>
-        </div>
+    </div>
     </div>
 </div>
 

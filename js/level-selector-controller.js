@@ -3,6 +3,8 @@ angular.module('level-selector', ['LocalStorageModule'])
     
     $scope.isLevelSelectorVisible = true;
     
+    $scope.isInfoVisible = false;
+    
     $scope.levelLock = [
             {state:'unlocked', text:'1'},
             {state:'locked', text:'2'},
@@ -65,6 +67,14 @@ angular.module('level-selector', ['LocalStorageModule'])
                 $scope.levelLock[index]['state'] = value[index]['state'];
             }
         }
+    };
+
+    $scope.showInfo = function() {
+        $scope.isInfoVisible = true;
+    };
+    
+    $scope.hideInfo = function() {
+        $scope.isInfoVisible = false;
     };
 
     var init = function() {

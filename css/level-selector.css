@@ -39,13 +39,21 @@
 
 #badges {
     text-align: center;
-    vertical-align: top;
+    vertical-align: middle;
     position: fixed;
     left: 0px;
     right: 0px;
     bottom: 0px;
+    font-size: 4em;
 }
 
+.badge {
+    vertical-align: middle;
+}
+
+.ylogo {
+    width: 1em;
+}
 
 .instructionGreen {
     color: darkgreen;
