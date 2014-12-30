@@ -1,5 +1,5 @@
 angular.module('level-complete', [])
-.controller('LevelCompleteController', function($scope, $rootScope) {
+.controller('LevelCompleteController', function($scope, $rootScope, $window) {
      
     $scope.isLevelCompleteVisible = false;
     
@@ -32,6 +32,10 @@ angular.module('level-complete', [])
      
     $scope.cancelLevel = function() {
         $scope.isLevelCompleteVisible = false;
+    };
+    
+     $scope.openUrl = function(url) {
+        $window.open(url);
     };
      
     $rootScope.$on('completeLevel', $scope.completeLevel);

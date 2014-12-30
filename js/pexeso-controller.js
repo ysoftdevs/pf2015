@@ -103,20 +103,6 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
     
     $scope.currentLevel = $scope.levels[0];
     
-    $scope.languages = {
-        'cs-CZ': {
-            title: 'Čeština'
-        },
-        'en-US': {
-            title: 'English'
-        },
-        'sk-SK': {
-            title: 'Slovenčina'
-        }
-    };
-    
-    
-    
     $scope.cards = basicCards;
     
     $scope.board = [];
@@ -277,7 +263,7 @@ angular.module('app', ['angular-flippy', 'level-selector', 'level-complete'])
         if ($scope.areAllSelectedSame()) {
             $scope.setSelectionState('solved');
             if ($scope.isLevelComplete()) {
-                $timeout($scope.completeLevel, 1000);
+                $timeout($scope.completeLevel, 3000);
             }
         } else if ($scope.selectionCounter == $scope.chainLength) {
             $timeout($scope.resetSelection, 1000);

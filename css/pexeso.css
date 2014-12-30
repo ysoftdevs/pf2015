@@ -75,7 +75,7 @@ BODY, HTML {
 	margin-top: 15%;
 }
 
-#levelComplete {
+.levelComplete {
     position: relative;
     z-index: 200;
     background:rgba(0,0,0,0.7);
