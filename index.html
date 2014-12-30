@@ -4,15 +4,19 @@
 <head>
 <meta charset="utf-8">
 <title>PF2015</title>
-
+<meta name="author" content="Juraj Michálek" />
+<meta name="description" content="PF 2015 greeting - card puzzle game - find similar cards" />
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/angularjs/1.3.7/angular.min.js"></script>
 
 <script type="text/javascript" src="js/level-data-service.js"></script>
 <script type="text/javascript" src="js/pexeso-controller.js"></script>
+
 <link rel="stylesheet" href="css/pexeso.css" type="text/css" />
+
+<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<link href="css/font-awesome.min.css" rel="stylesheet">
 
 <script src="js/angular-local-storage.min.js"></script>
 
@@ -84,9 +88,9 @@
             <a class="levelButton" id="replayButton" ng-click="restartLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-repeat"></i> Play again</a>
             <a class="levelButton" id="nextButton" ng-click="nextLevel()" ng-hide="isFinalScreenVisible"><i class="fa fa-arrow-right" ></i> Next level</a>
         </div>
-        <div>
-            <a class="levelButton" id="webButton" ng-click="openUrl(constellation.wiki)" ng-show="isFinalScreenVisible">
-                <i class="fa fa-thumbs-up" ></i>Visit PF 2015 website</a>
+        <div class="levelCompleteButtons">
+            <a class="levelButton" id="webButton" ng-click="openUrl('http://www.ysofters.com/2014/12/30/pf2015')" ng-show="isFinalScreenVisible">
+                <i class="fa fa-thumbs-up" ></i> Visit PF 2015 website</a>
         </div>
     </div>
 </div>
