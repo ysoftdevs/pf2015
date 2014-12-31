@@ -21,7 +21,52 @@
     background:rgba(0,0,0,0.5);
 }
 
-@media screen and (max-width: 340px) {
+@media (max-width: 240px) {
+	.levelSelectorTitle {
+	    display: none;
+	}
+	#infoGraphics {
+	    display: none;
+	}
+	.info {
+	    font-size: 0.7em;
+	}
+	.infoContent {
+	    font-size: 1em;
+	    padding-left: 0;
+	}
+	.levelItem {
+        width: 1.4em;
+        height: 1em;
+    }
+    .startLevel {
+        font-size: 1em;
+    }
+    .startLevelInstructions {
+        font-size: 1em;
+    }
+    .navigationBar {
+        font-size: 1em;
+    }
+    #congratulation {
+         font-size: 1em;   
+    }
+    .levelComplete {
+        height: 13em;
+    }
+    .levelButton {
+        font-size: 1em;
+        display: block;
+    }
+    .levelCompleteButtonsFinal {
+        margin-top: 3em;
+    }
+    .signature {
+        padding-bottom: 0;
+    }
+}
+
+@media (min-width: 240px) and (max-width: 340px) {
     .levelItem {
         width: 2em;
         height: 1.4em;

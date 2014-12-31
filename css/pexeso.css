@@ -156,8 +156,7 @@ BODY, HTML {
 	overflow: auto;
 }
 
-
-@media screen and (max-width: 340px) {
+@media (min-width: 240px) and (max-width: 340px) {
 	.info {
 		font-size: 0.8em;
 	}
