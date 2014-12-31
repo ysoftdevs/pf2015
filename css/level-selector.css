@@ -71,6 +71,9 @@
         width: 2em;
         height: 1.4em;
     }
+	.levelSelectorTitle {
+	    font-size: 1em;
+	}
 }
 
 .locked {
